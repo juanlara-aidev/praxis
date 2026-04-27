@@ -89,7 +89,12 @@ Cmd/Ctrl+Shift+P → Shell Command: Install 'code' command in PATH
 
 ## Actualizaciones automáticas
 
-Desde la versión `1.2.0` Praxis se actualiza sola: cuando hay versión nueva, aparece un **punto rojo** en el botón de actualización del sidebar. Un click descarga e instala la última versión desde este repo, y te ofrece recargar la ventana.
+Desde la versión `1.2.7` Praxis se actualiza sola con un **banner azul brillante** en la parte superior del sidebar que aparece SOLO cuando hay versión nueva:
+
+- Banner full-width "↑ Actualizar a vX.Y.Z" — imposible no verlo.
+- Toda el área del banner es el botón. Click → terminal integrado descarga + instala la nueva versión.
+- Al terminar te ofrece recargar la ventana.
+- Si quieres forzar un check manual: `Cmd/Ctrl+Shift+P` → "Praxis: Buscar actualizaciones de la extensión".
 
 Cero GitHub manual. Cero descargas. Cero comandos tecleados.
 
