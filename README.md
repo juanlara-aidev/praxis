@@ -73,7 +73,7 @@ Este error aparece **al instalar el `.vsix`** cuando éste está en una ruta de 
 
    Reinicia el editor. Después podrás instalar `.vsix` desde rutas UNC sin bloqueo.
 
-> Una vez instalada, **Praxis se actualiza sola** desde el sidebar y siempre descarga a `%TEMP%` / `/tmp`. Este problema sólo aparece en la primera instalación.
+> Una vez instalada, **para actualizar Praxis ejecuta el mismo comando otra vez** (siempre descarga a `%TEMP%` / `/tmp`). Este problema sólo aparece en la primera instalación si el `.vsix` quedó en una ruta UNC.
 
 ### El comando `code` (o `cursor`, `windsurf`, `antigravity`) no se reconoce
 
@@ -87,16 +87,33 @@ Cmd/Ctrl+Shift+P → Shell Command: Install 'code' command in PATH
 
 ---
 
-## Actualizaciones automáticas
+## Cómo actualizar Praxis
 
-Desde la versión `1.2.7` Praxis se actualiza sola con un **banner azul brillante** en la parte superior del sidebar que aparece SOLO cuando hay versión nueva:
+> **Es exactamente el mismo comando que usaste para instalar.** Vuélvelo a ejecutar y reemplaza tu versión actual con la última publicada. `--force` lo hace idempotente — funciona aunque ya tengas la última.
 
-- Banner full-width "↑ Actualizar a vX.Y.Z" — imposible no verlo.
-- Toda el área del banner es el botón. Click → terminal integrado descarga + instala la nueva versión.
-- Al terminar te ofrece recargar la ventana.
-- Si quieres forzar un check manual: `Cmd/Ctrl+Shift+P` → "Praxis: Buscar actualizaciones de la extensión".
+### Windows — PowerShell
 
-Cero GitHub manual. Cero descargas. Cero comandos tecleados.
+```powershell
+$tmp="$env:TEMP\praxis.vsix"; iwr "https://github.com/juanlara-aidev/praxis/releases/latest/download/praxis.vsix" -OutFile $tmp; code --install-extension $tmp --force
+```
+
+### Windows — cmd.exe
+
+```cmd
+curl -fL -o "%TEMP%\praxis.vsix" "https://github.com/juanlara-aidev/praxis/releases/latest/download/praxis.vsix" && code --install-extension "%TEMP%\praxis.vsix" --force
+```
+
+### macOS / Linux — bash, zsh, fish
+
+```bash
+curl -fL -o /tmp/praxis.vsix "https://github.com/juanlara-aidev/praxis/releases/latest/download/praxis.vsix" && code --install-extension /tmp/praxis.vsix --force
+```
+
+Después: `Cmd/Ctrl+Shift+P → Reload Window`.
+
+**Atajo dentro del editor**: el botón **↑ Actualizar** del topbar del sidebar abre una terminal integrada con ese mismo comando ya escrito y lo ejecuta. Click → reinstala la última versión → ofrece recargar la ventana.
+
+> **¿Algo no funciona como esperas?** Cualquier issue que sospeches — caché stale, archivo corrupto, fix recién publicado, "no me deja entrar aunque ya soy miembro" — se resuelve **ejecutando el comando otra vez**. Sin debug, sin command palette, sin búsqueda de versiones. El comando de install **es** el comando de update, y eso es la única ruta de soporte que necesitas recordar.
 
 ---
 
