@@ -1,134 +1,121 @@
+<!--
+  Esta página la lee un alumno de SinergIA por primera vez.
+  Tono amigable, cero jerga. Mantener identidad: Juan Lara.
+  Ver "Reglas de copy público" en praxis-dev/CLAUDE.md.
+-->
+
 # Praxis
 
-> Sistema inteligente de producción de software — extensión para VS Code, Cursor, Windsurf y Antigravity.
+> Hecho por **Juan Lara** · Para la comunidad **SinergIA**
 
-Este es el repositorio público de **releases** de Praxis. Si buscas el código fuente, está fuera de distribución.
+Hola, soy Juan. Hice esta extensión para que cuando abras tu editor de código y quieras crear un proyecto SaaS completo, lo tengas listo en menos de un minuto sin pelearte con setup. Pensada para ti, alumno de SinergIA, estés empezando o ya hayas creado varios proyectos.
 
 ---
 
-## Instalación rápida (recomendada — un solo comando)
+## Antes de empezar
 
-Usa el one-liner que corresponda a tu sistema. **Descarga el `.vsix` a una ruta local garantizada (`%TEMP%` / `/tmp`) y lo instala**, así evita problemas con rutas de red (`\\host\share\...`) que algunos editores bloquean por seguridad.
+Necesitas dos cosas:
 
-### Windows — PowerShell
+1. Un editor de código instalado: **VS Code**, **Cursor**, **Windsurf** o **Antigravity**.
+2. Tu correo de SinergIA a la mano (con el que entras a Skool).
+
+Eso es todo.
+
+---
+
+## Instálala en 30 segundos
+
+Copia el comando que corresponda a tu sistema, pégalo en una terminal y dale Enter. Descarga la extensión a una carpeta temporal de tu computadora y la instala automáticamente.
+
+### En Windows (PowerShell)
 
 ```powershell
 $tmp="$env:TEMP\praxis.vsix"; iwr "https://github.com/juanlara-aidev/praxis/releases/latest/download/praxis.vsix" -OutFile $tmp; code --install-extension $tmp --force
 ```
 
-> Reemplaza `code` por `cursor`, `windsurf` o `antigravity` si usas otro editor.
-
-### Windows — cmd.exe
+### En Windows (cmd.exe)
 
 ```cmd
 curl -fL -o "%TEMP%\praxis.vsix" "https://github.com/juanlara-aidev/praxis/releases/latest/download/praxis.vsix" && code --install-extension "%TEMP%\praxis.vsix" --force
 ```
 
-### macOS / Linux — bash, zsh, fish
+### En macOS o Linux
 
 ```bash
 curl -fL -o /tmp/praxis.vsix "https://github.com/juanlara-aidev/praxis/releases/latest/download/praxis.vsix" && code --install-extension /tmp/praxis.vsix --force
 ```
 
-> Reemplaza `code` por `cursor`, `windsurf` o `antigravity` si usas otro editor.
+> ¿Usas Cursor, Windsurf o Antigravity? Reemplaza `code` por `cursor`, `windsurf` o `antigravity` en el comando.
 
-Después: recarga la ventana — `Cmd/Ctrl+Shift+P → Reload Window`.
-
----
-
-## Instalación manual (si prefieres descargar primero)
-
-1. Descarga el `.vsix` desde la pestaña [Releases](https://github.com/juanlara-aidev/praxis/releases/latest).
-2. **Muévelo a una ruta local con letra de unidad** (Windows: `C:\Users\<tu-usuario>\AppData\Local\Temp\`, macOS/Linux: `/tmp/` o `~/`). No lo dejes en una carpeta sincronizada vía SMB / red / VM share.
-3. Instala desde esa ruta:
-
-   ```bash
-   # ejemplo Windows
-   code --install-extension "C:\Users\<tu-usuario>\AppData\Local\Temp\praxis.vsix" --force
-
-   # ejemplo macOS / Linux
-   code --install-extension /tmp/praxis.vsix --force
-   ```
-4. Recarga la ventana — `Cmd/Ctrl+Shift+P → Reload Window`.
+Cuando termine, recarga la ventana del editor: `Cmd/Ctrl + Shift + P` → escribe **Reload Window** → Enter.
 
 ---
 
-## Solución de problemas
+## Tu primer uso, paso a paso
 
-### `Extract: UNC host '<nombre>' access is not allowed`
+1. **Abre tu editor.** Vas a ver un nuevo ícono ⚡ en la barra lateral de la izquierda. Dale click — se abre el panel de Praxis.
 
-Este error aparece **al instalar el `.vsix`** cuando éste está en una ruta de red estilo `\\Mac\Home\...`, `\\wsl$\...`, `\\server\share\...`. Suele pasar cuando corres Windows en una VM (Parallels, VMware, UTM) y la carpeta de Downloads del Windows apunta físicamente al disco del Mac/Linux host.
+2. **Verifica tu membresía.** El panel te pide tu correo de SinergIA. Escríbelo y dale a **Verificar**. Praxis confirma que eres miembro y te abre el dashboard.
 
-**Soluciones (de más sencilla a más permisiva)**:
+3. **Activa Praxis en tu proyecto.** Abre la carpeta donde quieres crear tu app (puede estar vacía). En el panel de Praxis verás un botón grande **INICIAR**. Dale click.
 
-1. **Usa el one-liner de "Instalación rápida" arriba.** Descarga el `.vsix` a `%TEMP%`, que siempre es una ruta local con letra de unidad. Resuelve el 100 % de los casos sin tocar settings.
+4. **¡Listo!** En menos de un minuto Praxis te dejó:
+   - El proyecto Next.js completo configurado.
+   - Un archivo `CLAUDE.md` con instrucciones para que Claude trabaje en tu codebase.
+   - 7 habilidades activas de inicio (brief, prp, bucle-agentico, frontend-design, playwright-cli, skill-creator y build-with-agent-team).
+   - Conexiones automáticas con Next DevTools y Playwright.
+   - Un `README.md` en la raíz con los siguientes pasos (`npm install`, configurar tu `.env.local`, `npm run dev`).
 
-2. **Mueve el `.vsix` a una ruta local antes de instalarlo.** Cualquier carpeta bajo `C:\` (no `\\Mac\...`, no `\\wsl$\...`) sirve.
-
-3. **Permite el host UNC en VS Code.** Edita tus settings de usuario (`Cmd/Ctrl+,` → "Open User Settings (JSON)") y agrega el host que aparece en el error:
-
-   ```json
-   "security.allowedUNCHosts": ["mac", "wsl$"]
-   ```
-
-   Reinicia el editor. Después podrás instalar `.vsix` desde rutas UNC sin bloqueo.
-
-> Una vez instalada, **para actualizar Praxis ejecuta el mismo comando otra vez** (siempre descarga a `%TEMP%` / `/tmp`). Este problema sólo aparece en la primera instalación si el `.vsix` quedó en una ruta UNC.
-
-### El comando `code` (o `cursor`, `windsurf`, `antigravity`) no se reconoce
-
-El CLI del editor no está en tu `PATH`. Abre el editor y ejecuta:
-
-```
-Cmd/Ctrl+Shift+P → Shell Command: Install 'code' command in PATH
-```
-
-(o la variante para Cursor / Windsurf / Antigravity). Después abre una terminal nueva y reintenta el one-liner.
+Después de eso, abre el `README.md` que te dejé y sigues los pasos. En SinergIA tienes los videos que te explican cada parte.
 
 ---
 
-## Cómo actualizar Praxis
+## Cómo se actualiza
 
-> **Es exactamente el mismo comando que usaste para instalar.** Vuélvelo a ejecutar y reemplaza tu versión actual con la última publicada. `--force` lo hace idempotente — funciona aunque ya tengas la última.
+Praxis se actualiza sola. En la parte de arriba del panel de Praxis siempre vas a ver un pequeño botón de **Actualizar**:
 
-### Windows — PowerShell
+- Cuando estás al día, el botón aparece tenue (casi invisible).
+- Cuando hay versión nueva, el botón se pone azul brillante con el número de la versión nueva.
 
-```powershell
-$tmp="$env:TEMP\praxis.vsix"; iwr "https://github.com/juanlara-aidev/praxis/releases/latest/download/praxis.vsix" -OutFile $tmp; code --install-extension $tmp --force
-```
+En cualquiera de los dos casos, click en el botón → se descarga la versión más reciente → te ofrece recargar la ventana → listo. Tarda 5 segundos.
 
-### Windows — cmd.exe
-
-```cmd
-curl -fL -o "%TEMP%\praxis.vsix" "https://github.com/juanlara-aidev/praxis/releases/latest/download/praxis.vsix" && code --install-extension "%TEMP%\praxis.vsix" --force
-```
-
-### macOS / Linux — bash, zsh, fish
-
-```bash
-curl -fL -o /tmp/praxis.vsix "https://github.com/juanlara-aidev/praxis/releases/latest/download/praxis.vsix" && code --install-extension /tmp/praxis.vsix --force
-```
-
-Después: `Cmd/Ctrl+Shift+P → Reload Window`.
-
-**Atajo dentro del editor**: el botón **↑ Actualizar** del topbar del sidebar abre una terminal integrada con ese mismo comando ya escrito y lo ejecuta. Click → reinstala la última versión → ofrece recargar la ventana.
-
-> **¿Algo no funciona como esperas?** Cualquier issue que sospeches — caché stale, archivo corrupto, fix recién publicado, "no me deja entrar aunque ya soy miembro" — se resuelve **ejecutando el comando otra vez**. Sin debug, sin command palette, sin búsqueda de versiones. El comando de install **es** el comando de update, y eso es la única ruta de soporte que necesitas recordar.
+> 💡 ¿Algo raro pasa con la extensión? Dale click al botón de Actualizar aunque estés al día. Reinstala la última versión y arregla la mayoría de los problemas (archivos corruptos, ajustes que no se cargaron, lo que sea).
 
 ---
 
-## URL estable del último `.vsix`
+## ¿Y si ya tengo un proyecto que estaba trabajando?
 
-Para scripts o automatizaciones, la última versión siempre está en:
+Praxis sabe distinguir cuándo tu carpeta está vacía y cuándo ya tienes archivos. Si abres un proyecto que ya tenía cosas tuyas (un `CLAUDE.md` propio, un `README.md`, código en `src/`, etc.):
 
-```
-https://github.com/juanlara-aidev/praxis/releases/latest/download/praxis.vsix
-```
+- Praxis te pregunta antes de tocar nada.
+- **No se sobrescribe ningún archivo que ya tengas.** Tu `CLAUDE.md`, tu `README.md`, tu código quedan intactos byte por byte.
+- Solo te agrega lo que falta: las habilidades en `.claude/skills/` que no tengas y las conexiones (MCPs) en `.mcp.json` que no estén configuradas.
 
-Esta URL no lleva versión en el filename — siempre resuelve al asset más reciente.
+Es seguro probarlo en un proyecto que ya estés desarrollando.
 
 ---
 
-## Membresía
+## Si algo se rompió
 
-El uso está gated por membresía activa de [SinergIA](https://www.skool.com/sinergia). La extensión se puede instalar libremente; el panel de autenticación aparece al abrirla.
+### "No se reconoce el comando `code` (o `cursor`, `windsurf`, `antigravity`)"
+
+El comando del editor no está en el sistema. Abre tu editor, pulsa `Cmd/Ctrl + Shift + P`, escribe **Shell Command: Install 'code' command in PATH** y dale Enter (la versión correspondiente para Cursor/Windsurf/Antigravity tiene el mismo nombre con su prefijo). Después abre una terminal nueva y vuelve a intentar el comando de instalación.
+
+### "Extract: UNC host '...' access is not allowed"
+
+Te aparece si estás corriendo Windows dentro de Parallels, VMware o WSL. La carpeta donde descargaste el archivo apunta al disco del Mac/Linux y el editor lo bloquea por seguridad. **La solución es usar el comando de la sección "Instálala en 30 segundos"** — descarga el archivo a `%TEMP%` (que es una carpeta local de Windows) y se instala desde ahí. Si seguiste otro camino, copia el archivo `praxis.vsix` a `C:\Users\<tu-usuario>\` y ejecuta `code --install-extension "C:\Users\<tu-usuario>\praxis.vsix" --force` desde ahí.
+
+### Cualquier otra cosa
+
+Cuéntame en SinergIA. La comunidad probablemente ya pasó por lo mismo.
+
+---
+
+## ¿Tienes dudas o ideas?
+
+- 💙 La **comunidad de SinergIA** en Skool: https://www.skool.com/sinergia
+- 🐛 Para reportar bugs: [GitHub Issues del repo público](https://github.com/juanlara-aidev/praxis/issues)
+
+---
+
+Hecho con cariño por **Juan Lara** · Para la comunidad **SinergIA** 💙
