@@ -6,9 +6,7 @@
 
 # Praxis
 
-> Hecho por **Juan Lara** · Para la comunidad **SinergIA**
-
-Hola, soy Juan. Hice esta extensión para que cuando abras tu editor de código y quieras crear un proyecto SaaS completo, lo tengas listo en menos de un minuto sin pelearte con setup. Pensada para ti, alumno de SinergIA, estés empezando o ya hayas creado varios proyectos.
+> Hecho por **Juan Lara** · Para la comunidad **SinergIA**0
 
 ---
 
@@ -111,11 +109,11 @@ Cuéntame en SinergIA. La comunidad probablemente ya pasó por lo mismo.
 
 ---
 
-## ¿Tienes dudas o ideas?
+## ¿Tienes dudas?
 
 - 💙 La **comunidad de SinergIA** en Skool: https://www.skool.com/sinergia
 - 🐛 Para reportar bugs: [GitHub Issues del repo público](https://github.com/juanlara-aidev/praxis/issues)
 
 ---
 
-Hecho con cariño por **Juan Lara** · Para la comunidad **SinergIA** 💙
+Hecho por **Juan Lara** · Para la comunidad **SinergIA** 💙
