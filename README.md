@@ -6,7 +6,7 @@
 
 # Praxis
 
-> Hecho por **Juan Lara** · Para la comunidad **SinergIA**0
+> Hecho por **Juan Lara** · Para la comunidad **SinergIA**
 
 ---
 
